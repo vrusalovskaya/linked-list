@@ -16,6 +16,8 @@ public class LinkedList {
         Node new_node = new Node(data);
 
         Node temp = head;
+        if (isNullAndInsertInTheBeginning(temp, data)) {return;}
+
         while (temp.next != null) {
             temp = temp.next;
         }
@@ -25,6 +27,9 @@ public class LinkedList {
 
     public void insertAfterNode(Node node, String data) {
         Node new_node = new Node(data);
+
+        if (isNullAndInsertInTheBeginning(node, data)) {return;}
+
         new_node.next = node.next;
         node.next = new_node;
     }
@@ -36,18 +41,23 @@ public class LinkedList {
         }
 
         Node temp = head;
-        for (int i = 1; i < position; i++) {
+        for (int i = 1; temp != null && i < position - 1 ; i++) {
             temp = temp.next;
         }
 
         if (temp != null) {
             insertAfterNode(temp, data);
-        }
+        }else {isNullAndInsertInTheBeginning(temp, data);}
     }
 
     public boolean removeValue(String data) {
         Node temp = head;
         Node prev = null;
+
+        if (Objects.equals(head.data, data)){
+            head = head.next;
+            return true;
+        }
 
         while (temp != null && !Objects.equals(temp.data, data)) {
             prev = temp;
@@ -68,12 +78,8 @@ public class LinkedList {
             return true;
         }
 
-        for (int i = 1; i < position; i++) {
-            if (temp == null) {
-                break;
-            } else {
+        for (int i = 1; temp != null && i < position - 1; i++) {
                 temp = temp.next;
-            }
         }
 
         if (temp != null) {
@@ -91,13 +97,13 @@ public class LinkedList {
         return temp != null && Objects.equals(temp.data, data);
     }
 
-    public Integer listLength(Node head) {
-        if (head == null) {
+    public Integer length () {
+        if (this.head == null) {
             return 0;
         }
 
         Integer count = 1;
-        Node temp = head;
+        Node temp = this.head;
 
         while (temp.next != null){
             count ++;
@@ -106,7 +112,16 @@ public class LinkedList {
         return count;
     }
 
-    public void clearList (){
+    public void clear (){
         this.head = null;
     }
+
+    private boolean isNullAndInsertInTheBeginning(Node temp, String data){
+        if (temp == null){
+            insertInTheBeginning(data);
+            return true;
+        }
+        else {return false;}
+    }
+
 }
