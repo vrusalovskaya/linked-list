@@ -1,5 +1,7 @@
 package org.linkedlist;
 
+import java.util.Objects;
+
 public class LinkedList {
 
     Node head;
@@ -27,9 +29,10 @@ public class LinkedList {
         node.next = new_node;
     }
 
-    public boolean insertAtPosition(Integer position, String data) {
+    public void insertAtPosition(Integer position, String data) {
         if (position == 1) {
             insertInTheBeginning(data);
+            return;
         }
 
         Node temp = head;
@@ -37,10 +40,73 @@ public class LinkedList {
             temp = temp.next;
         }
 
-        if (temp == null) {
-            return false;
-        } else insertAfterNode(temp, data);
-        return true;
+        if (temp != null) {
+            insertAfterNode(temp, data);
+        }
     }
 
+    public boolean removeValue(String data) {
+        Node temp = head;
+        Node prev = null;
+
+        while (temp != null && !Objects.equals(temp.data, data)) {
+            prev = temp;
+            temp = temp.next;
+        }
+
+        if (temp != null && Objects.equals(temp.data, data)) {
+            prev.next = temp.next;
+            return true;
+        } else return false;
+    }
+
+    public boolean removeByPosition(Integer position) {
+        Node temp = head;
+
+        if (temp != null && position == 1) {
+            head = head.next;
+            return true;
+        }
+
+        for (int i = 1; i < position; i++) {
+            if (temp == null) {
+                break;
+            } else {
+                temp = temp.next;
+            }
+        }
+
+        if (temp != null) {
+            temp.next = temp.next.next;
+            return true;
+        } else return false;
+    }
+
+    public boolean search(String data) {
+        Node temp = head;
+        while (temp != null && !Objects.equals(temp.data, data)) {
+            temp = temp.next;
+        }
+
+        return temp != null && Objects.equals(temp.data, data);
+    }
+
+    public Integer listLength(Node head) {
+        if (head == null) {
+            return 0;
+        }
+
+        Integer count = 1;
+        Node temp = head;
+
+        while (temp.next != null){
+            count ++;
+            temp = temp.next;
+        }
+        return count;
+    }
+
+    public void clearList (Node head){
+        head = null;
+    }
 }
