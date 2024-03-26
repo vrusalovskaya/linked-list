@@ -94,7 +94,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711442035257</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add implementation in Main, add print methods, improve null validation">
+      <option name="closed" value="true" />
+      <created>1711450515582</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1711450515582</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -113,7 +121,8 @@
     <MESSAGE value="add Node class" />
     <MESSAGE value="add Linked List class, add insert methods" />
     <MESSAGE value="add remove, search, length, clear methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="add remove, search, length, clear methods" />
+    <MESSAGE value="add implementation in Main, add print methods, improve null validation" />
+    <option name="LAST_COMMIT_MESSAGE" value="add implementation in Main, add print methods, improve null validation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

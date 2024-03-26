@@ -3,8 +3,30 @@ package org.linkedlist;
 import java.util.Objects;
 
 public class LinkedList {
+    private class Node implements INode {
+        String data;
+        Node next;
 
-    Node head;
+        Node (String data){
+            this.data = data;
+            next = null;
+        }
+
+        @Override
+        public INode getNext() {
+            return next;
+        }
+
+        @Override
+        public String getData() {
+            return data;
+        }
+    }
+    private Node head;
+
+    public INode getHead () {
+        return head;
+    }
 
     public void insertInTheBeginning(String data) {
         Node new_node = new Node(data);
@@ -16,22 +38,15 @@ public class LinkedList {
         Node new_node = new Node(data);
 
         Node temp = head;
-        if (isNullAndInsertInTheBeginning(temp, data)) {return;}
+        if (insertInTheBeggingIfEmpty(temp, data)) {
+            return;
+        }
 
         while (temp.next != null) {
             temp = temp.next;
         }
 
         temp.next = new_node;
-    }
-
-    public void insertAfterNode(Node node, String data) {
-        Node new_node = new Node(data);
-
-        if (isNullAndInsertInTheBeginning(node, data)) {return;}
-
-        new_node.next = node.next;
-        node.next = new_node;
     }
 
     public void insertAtPosition(Integer position, String data) {
@@ -41,20 +56,22 @@ public class LinkedList {
         }
 
         Node temp = head;
-        for (int i = 1; temp != null && i < position - 1 ; i++) {
+        for (int i = 1; temp != null && i < position - 1; i++) {
             temp = temp.next;
         }
 
         if (temp != null) {
             insertAfterNode(temp, data);
-        }else {isNullAndInsertInTheBeginning(temp, data);}
+        } else {
+            insertInTheBeggingIfEmpty(temp, data);
+        }
     }
 
     public boolean removeValue(String data) {
         Node temp = head;
         Node prev = null;
 
-        if (Objects.equals(head.data, data)){
+        if (Objects.equals(head.data, data)) {
             head = head.next;
             return true;
         }
@@ -67,7 +84,9 @@ public class LinkedList {
         if (temp != null && Objects.equals(temp.data, data)) {
             prev.next = temp.next;
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     public boolean removeByPosition(Integer position) {
@@ -79,13 +98,15 @@ public class LinkedList {
         }
 
         for (int i = 1; temp != null && i < position - 1; i++) {
-                temp = temp.next;
+            temp = temp.next;
         }
 
         if (temp != null) {
             temp.next = temp.next.next;
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     public boolean search(String data) {
@@ -94,10 +115,10 @@ public class LinkedList {
             temp = temp.next;
         }
 
-        return temp != null && Objects.equals(temp.data, data);
+        return temp != null;
     }
 
-    public Integer length () {
+    public Integer length() {
         if (this.head == null) {
             return 0;
         }
@@ -105,23 +126,36 @@ public class LinkedList {
         Integer count = 1;
         Node temp = this.head;
 
-        while (temp.next != null){
-            count ++;
+        while (temp.next != null) {
+            count++;
             temp = temp.next;
         }
         return count;
     }
 
-    public void clear (){
+    public void clear() {
         this.head = null;
     }
 
-    private boolean isNullAndInsertInTheBeginning(Node temp, String data){
-        if (temp == null){
+    private boolean insertInTheBeggingIfEmpty(Node temp, String data) {
+        if (temp == null) {
             insertInTheBeginning(data);
             return true;
+        } else {
+            return false;
         }
-        else {return false;}
+    }
+
+    private void insertAfterNode(Node node, String data) {
+        Node new_node = new Node(data);
+
+        if (insertInTheBeggingIfEmpty(node, data)) {
+            return;
+        }
+
+        new_node.next = node.next;
+        node.next = new_node;
     }
 
 }
+

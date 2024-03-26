@@ -5,9 +5,9 @@ public class Main {
 
         LinkedList list = new LinkedList();
 
+        list.insertAtTheEnd("test1");
         list.insertInTheBeginning("First Node");
         list.insertAtTheEnd("Last Node");
-        list.insertAfterNode(list.head, "Middle Node");
         list.insertAtPosition(3, "Hello");
         list.insertInTheBeginning("The Very First Node");
         list.insertInTheBeginning("Hello");
@@ -28,10 +28,11 @@ public class Main {
 
         list.clear();
         printList(list);
+
     }
 
     public static void printList(LinkedList list) {
-        Node p = list.head;
+        var p = list.getHead();
 
         if (p == null) {
             System.out.println("The list is empty");
@@ -40,8 +41,8 @@ public class Main {
 
         System.out.println("Linked list: ");
         while (p != null) {
-            System.out.print("[" + p.data + "] ");
-            p = p.next;
+            System.out.print("[" + p.getData() + "] ");
+            p = p.getNext();
         }
         System.out.println();
     }
