@@ -106,7 +106,7 @@ public class LinkedList {
         return count;
     }
 
-    public void clearList (Node head){
-        head = null;
+    public void clearList (){
+        this.head = null;
     }
 }
