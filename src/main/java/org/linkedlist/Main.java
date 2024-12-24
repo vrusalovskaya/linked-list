@@ -23,7 +23,7 @@ public class Main {
         confirmRemoval(list.removeValue("Hello"));
         printList(list);
 
-        confirmRemoval(list.removeByPosition(5));
+        confirmRemoval(list.removeByPosition(7));
         printList(list);
 
         list.clear();

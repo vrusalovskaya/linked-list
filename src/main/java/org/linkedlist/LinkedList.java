@@ -7,9 +7,8 @@ public class LinkedList {
         String data;
         Node next;
 
-        Node (String data){
+        Node(String data) {
             this.data = data;
-            next = null;
         }
 
         @Override
@@ -22,9 +21,10 @@ public class LinkedList {
             return data;
         }
     }
+
     private Node head;
 
-    public INode getHead () {
+    public INode getHead() {
         return head;
     }
 
@@ -35,12 +35,12 @@ public class LinkedList {
     }
 
     public void insertAtTheEnd(String data) {
-        Node new_node = new Node(data);
-
-        Node temp = head;
-        if (insertInTheBeggingIfEmpty(temp, data)) {
+        if (insertInTheBeginningIfEmpty(head, data)) {
             return;
         }
+
+        Node new_node = new Node(data);
+        Node temp = head;
 
         while (temp.next != null) {
             temp = temp.next;
@@ -60,14 +60,14 @@ public class LinkedList {
             temp = temp.next;
         }
 
-        if (temp != null) {
-            insertAfterNode(temp, data);
-        } else {
-            insertInTheBeggingIfEmpty(temp, data);
-        }
+        insertAfterNode(temp, data);
     }
 
     public boolean removeValue(String data) {
+        if (head == null) {
+            return false;
+        }
+
         Node temp = head;
         Node prev = null;
 
@@ -101,7 +101,7 @@ public class LinkedList {
             temp = temp.next;
         }
 
-        if (temp != null) {
+        if (temp != null && temp.next != null) {
             temp.next = temp.next.next;
             return true;
         } else {
@@ -137,7 +137,7 @@ public class LinkedList {
         this.head = null;
     }
 
-    private boolean insertInTheBeggingIfEmpty(Node temp, String data) {
+    private boolean insertInTheBeginningIfEmpty(Node temp, String data) {
         if (temp == null) {
             insertInTheBeginning(data);
             return true;
@@ -149,7 +149,7 @@ public class LinkedList {
     private void insertAfterNode(Node node, String data) {
         Node new_node = new Node(data);
 
-        if (insertInTheBeggingIfEmpty(node, data)) {
+        if (insertInTheBeginningIfEmpty(node, data)) {
             return;
         }
 
